@@ -15,9 +15,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $travel_packages = TravelPackage::with('galleries')->get();
+        $travel_packages = TravelPackage::with('galleries')->where('type', 'Daily Tour')->get();
+        $rinjani = TravelPackage::with('galleries')->where('type', 'Trip To Rinjani')->get();
         $blogs = Blog::get()->take(3);
 
-        return view('homepage', compact('travel_packages','blogs'));
+        return view('homepage', compact('travel_packages','blogs','rinjani'));
     }
 }
