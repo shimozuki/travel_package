@@ -62,7 +62,7 @@
   </div>
   <div class="modal-body">
     <div class="amount">
-      <h2>Rp20.000</h2>
+      <h2>Rp{{$travel_package->price }}</h2>
       <p>Order ID #Wisata-451</p>
     </div>
     <p>Pilih Metode Pembayaran</p>
