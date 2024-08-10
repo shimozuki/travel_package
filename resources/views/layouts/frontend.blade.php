@@ -63,7 +63,7 @@
 
             @auth
             <!-- Jika pengguna sudah login -->
-            <a target="_blank" href="#" class="button nav__button">My Transaction</a>
+            <a target="_blank" href="{{ route('login') }}" class="button nav__button">My Transaction</a>
             @else
             <!-- Jika pengguna belum login -->
             <a target="_blank" href="{{ route('login') }}" class="button nav__button">Login</a>
