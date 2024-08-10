@@ -29,9 +29,15 @@ class BookingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function verify($id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+
+        // Verifikasi pembayaran lain jika diperlukan
+        $booking->status = 1; // Set status menjadi 1 (Lunas)
+        $booking->save();
+
+        return response()->json(['success' => true, 'message' => 'Pembayaran berhasil diverifikasi.']);
     }
 
     /**

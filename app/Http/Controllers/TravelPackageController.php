@@ -16,8 +16,11 @@ class TravelPackageController extends Controller
 
     public function show(TravelPackage $travel_package)
     {
-        $travel_packages = TravelPackage::where('id', '!=', $travel_package->id)->get();
 
-        return view('travel_packages.show', compact('travel_package', 'travel_packages'));
+        $travel_packages = TravelPackage::where('id', '!=', $travel_package->id)->get();
+        $user = auth()->user();
+
+
+        return view('travel_packages.show', compact('travel_package', 'travel_packages', 'user'));
     }
 }
