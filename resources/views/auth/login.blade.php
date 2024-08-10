@@ -57,6 +57,10 @@
                 <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
             </p>
         @endif
+        
+        <p class="mt-2">
+            {{ __("Don't have an account?") }} <a href="{{ route('register') }}" class="text-center">{{ __('Register Now') }}</a>
+        </p>
     </div>
     <!-- /.login-card-body -->
 @endsection
