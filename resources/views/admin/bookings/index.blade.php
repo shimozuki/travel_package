@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<style scoped>
+    .disabled-button {
+        background-color: #cccccc;
+        /* Warna abu-abu untuk menunjukkan tombol tidak aktif */
+        border-color: #cccccc;
+        /* Sesuaikan warna border dengan background */
+        color: #666666;
+        /* Sesuaikan warna teks */
+        cursor: not-allowed;
+        /* Ubah kursor menjadi tanda larangan */
+    }
+</style>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -69,7 +81,11 @@
                                             <button class="btn btn-sm btn-danger"> <i class="fa fa-trash"></i> </button>
                                         </form>
                                         @elseif (auth()->user()->is_admin == 2)
+                                        @if ($booking->status == 1) <!-- Jika status Lunas -->
                                         <a href="{{ route('download.ticket', $booking) }}" class="btn btn-primary">Lihat Tiket</a>
+                                        @else
+                                        <a href="#" class="btn btn-primary disabled-button" style="pointer-events: none;">Lihat Tiket</a>
+                                        @endif
                                         @endif
 
                                         @if ($booking->status == 0 && auth()->user()->is_admin == 1) <!-- Button hanya muncul jika status 0 -->

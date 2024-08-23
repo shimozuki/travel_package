@@ -310,7 +310,12 @@
       })
       .then(data => {
         // Menggunakan SweetAlert untuk menampilkan pesan sukses
-        swal("Success!", data.message, "success");
+        swal("Success!", data.message, "success")
+          // .then(() => {
+          //   // Navigasi ke route tertentu setelah pesan sukses muncul
+          //   window.location.href = "{{ route('admin.bookings.index') }}";
+          // });
+          window.location.href = "{{ route('admin.bookings.index') }}";
         closeModal();
       })
       .catch(error => {
