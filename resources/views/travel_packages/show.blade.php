@@ -38,11 +38,16 @@
         <div class="card">
           <form id="bookingForm">
             @csrf
+            <input type="number" name="nomor_identitas" placeholder="Nomor Identitas" required />
             <input type="hidden" name="travel_package_id" value="{{ $travel_package->id }}">
             <input type="text" name="name" placeholder="Your Name" value="{{ $user->name }}" readonly />
             <input type="email" name="email" placeholder="Your Email" value="{{ $user->email }}" readonly />
             <input type="number" name="number_phone" placeholder="Your Number" required />
+            <input type="text" name="alamat" placeholder="Country" required />
             <input placeholder="Pick Your Date" class="textbox-n" type="text" name="date" onfocus="(this.type='date')" id="date" />
+            <button type="button" id="addPemesan" class="button button-booking">
+              <center>Tambah Penumpang</center>
+            </button>
             <a href="#" id="openPaymentModal" class="button button-booking">
               <center>Send</center>
             </a>
@@ -288,49 +293,78 @@
     }
   });
 
-  document.getElementById('submitBooking').addEventListener('click', function(e) {
-    e.preventDefault();
+  const addPemesanButton = document.getElementById('addPemesan');
+const bookingForm = document.getElementById('bookingForm');
 
-    let formData = new FormData(document.getElementById('bookingForm'));
-    const proofOfPayment = document.getElementById('proofOfPayment').files[0];
-    formData.append('proofOfPayment', proofOfPayment);
+let pemesanCount = 0;
+addPemesanButton.addEventListener('click', function() {
+  pemesanCount++;
+  const newPemesanForm = document.createElement('div');
+  newPemesanForm.className = 'pemesan-form';
+  newPemesanForm.innerHTML = `
+    <input type="text" name="pemesan_name[]" placeholder="Nama Pemesan" required />
+    <input type="number" name="pemesan_nomor_passport[]" placeholder="Nomor Identitas Pemesan" required />
+    <button type="button" class="remove-pemesan-button">Hapus</button>
+  `;
+  bookingForm.insertBefore(newPemesanForm, addPemesanButton);
 
-    fetch('{{ route('booking.store') }}', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-          }
-        })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Menggunakan SweetAlert untuk menampilkan pesan sukses
-        swal("Success!", data.message, "success")
-          // .then(() => {
-          //   // Navigasi ke route tertentu setelah pesan sukses muncul
-          //   window.location.href = "{{ route('admin.bookings.index') }}";
-          // });
-          window.location.href = "{{ route('admin.bookings.index') }}";
-        closeModal();
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        // Menggunakan SweetAlert untuk menampilkan pesan error
-        swal("Error!", "Terjadi kesalahan saat membuat booking.", "error");
-      });
+  const newRemovePemesanButton = newPemesanForm.querySelector('.remove-pemesan-button');
+  newRemovePemesanButton.addEventListener('click', function() {
+    newPemesanForm.remove();
+    pemesanCount--;
+  });
+});
+
+document.getElementById('submitBooking').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  let formData = new FormData(document.getElementById('bookingForm'));
+  const proofOfPayment = document.getElementById('proofOfPayment').files[0];
+  formData.append('proofOfPayment', proofOfPayment);
+
+  const pemesanForms = document.querySelectorAll('.pemesan-form');
+  const pemesanData = [];
+
+  pemesanForms.forEach((form, index) => {
+    const pemesanName = form.querySelector('input[name="pemesan_name[]"]').value;
+    const pemesanNomorPassport = form.querySelector('input[name="pemesan_nomor_passport[]"]').value;
+
+    pemesanData.push({
+      name_pemesan: pemesanName,
+      nomor_passport: pemesanNomorPassport,
+    });
   });
 
-  const closeAlertButton = document.getElementById('close');
-  const alertBox = document.getElementById('alert');
+  formData.append('pemesan_data', JSON.stringify(pemesanData));
 
-  if (closeAlertButton) {
-    closeAlertButton.addEventListener('click', function() {
-      alertBox.style.display = 'none';
+  fetch('{{ route('booking.store') }}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-CSRF-TOKEN': '{{ csrf_token() }}'
+        }
+      })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Menggunakan SweetAlert untuk menampilkan pesan sukses
+      // swal("Success!", data.message, "success")
+      console.log("response : ",  data.message);
+      // .then(() => {
+      //   // Navigasi ke route tertentu setelah pesan sukses muncul
+      //   window.location.href = "{{ route('admin.bookings.index') }}";
+      // });
+      // window.location.href = "{{ route('admin.bookings.index') }}";
+      closeModal();
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      // Menggunakan SweetAlert untuk menampilkan pesan error
+      swal("Error!", "Terjadi kesalahan saat membuat booking.", "error");
     });
-  }
+});
 </script>

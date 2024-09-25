@@ -16,18 +16,18 @@
         href="{{ asset('frontend/assets/libraries/swiper-bundle.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
     <!-- Link SweetAlert JS -->
-    
+
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
     @stack('style-alt')
-    <title>Lombok Tour & Travel</title>
+    <title>Karya Bahari</title>
 </head>
 
 <body>
     <!--==================== HEADER ====================-->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="{{ route('homepage') }}" class="nav__logo">LOMB<i class="bx bxs-map"></i>K TOUR & TRAVEL</a>
+            <a href="{{ route('homepage') }}" class="nav__logo"><i class="bx bxs-map"></i>KARYA BAHARI</a>
 
             <div class="nav__menu">
                 <ul class="nav__list">
@@ -81,7 +81,7 @@
         <div class="footer__container container grid">
             <div>
                 <a href="{{ route('homepage') }}" class="footer__logo">
-                    LOMB<i class="bx bxs-map"></i>K TOUR & TRAVEL
+                    <i class="bx bxs-map"></i>KARYA BAHARI
                 </a>
                 <p class="footer__description">
                     Our vision is to help people find the <br />
@@ -157,7 +157,7 @@
 
         <div class="footer__info container">
             <span class="footer__copy">
-                &#169; lombok Tour & Travel. All rigths reserved
+                &#169; Karya Bahari. All rigths reserved
             </span>
             <div class="footer__privacy">
                 <a href="#">Terms & Agreements</a>

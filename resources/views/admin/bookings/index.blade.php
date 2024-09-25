@@ -90,7 +90,7 @@
 
                                         @if ($booking->status == 0 && auth()->user()->is_admin == 1) <!-- Button hanya muncul jika status 0 -->
                                         <button class="btn btn-sm btn-success verify-payment"
-                                            data-id="{{ $booking->id }}"
+                                            data-id="{{ $booking->kode_booking }}"
                                             title="Verifikasi Pembayaran">
                                             <i class="fa fa-check"></i>
                                         </button>
