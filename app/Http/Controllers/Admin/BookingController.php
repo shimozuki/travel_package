@@ -17,12 +17,13 @@ class BookingController extends Controller
 
         if ($user->is_admin == 1) {
             // Jika pengguna adalah admin, ambil semua booking
-            $bookings = Booking::with('travel_package')->paginate(10);
+            $bookings = Booking::with('travel_package', 'ticket')
+            ->paginate(10);
         } else {
             // Jika pengguna bukan admin, ambil booking berdasarkan id_user
             $bookings = Booking::where('id_user', $user->id)
-                ->with('travel_package')
-                ->paginate(10);
+            ->with('travel_package', 'ticket')
+            ->paginate(10);
         }
 
         return view('admin.bookings.index', compact('bookings'));

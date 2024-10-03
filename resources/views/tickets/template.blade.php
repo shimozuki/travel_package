@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-6">
                     <p><strong>Nama:</strong> {{ $tickets->name }}</p>
-                    <p><strong>Email:</strong> {{ $tickets->travel_package->slug }}</p>
+                    <p><strong>Email:</strong> {{ $tickets->email }}</p>
                     <p><strong>Telepon:</strong> {{ $tickets->number_phone }}</p>
                     <p><strong>Negara:</strong> Indonesia</p>
                 </div>

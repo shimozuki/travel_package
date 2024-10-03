@@ -19,9 +19,9 @@ class HomeController extends Controller
         $travel_packages = TravelPackage::with('galleries')->where('type', 'Daily Tour')->get();
         $rinjani = TravelPackage::with('galleries')->where('type', 'Trip To Rinjani')->get();
         $blogs = Blog::get()->take(3);
-        $ports = Ticket::select('port_from_id', 'port_to_id')->get();
+        $ports = ['Bangsal', 'Gili Trawangan', 'Gili Meno', 'Gili Air'];
 
 
-        return view('homepage', compact('travel_packages','blogs','rinjani','ports'));
+        return view('homepage', compact('travel_packages', 'blogs', 'rinjani', 'ports'));
     }
 }

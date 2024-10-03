@@ -42,7 +42,7 @@
                                     <th>Email</th>
                                     <th>Number Phone</th>
                                     <th>Date</th>
-                                    <th>Travel Package</th>
+                                    <th>Travel Package / Tickets</th>
                                     <th>Bukti Pembayaran</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -56,7 +56,7 @@
                                     <td>{{ $booking->email }}</td>
                                     <td>{{ $booking->number_phone }}</td>
                                     <td>{{ $booking->date }}</td>
-                                    <td>{{ $booking->travel_package->location }}</td>
+                                    <td>{{ $booking->travel_package->location ?? $booking->ticket->port_from_id . ' to ' . $booking->ticket->port_to_id }}</td>
                                     <td>
                                         @if ($booking->bukti)
                                         <a href="#" class="view-proof" data-url="{{ Storage::url($booking->bukti) }}" data-toggle="modal" data-target="#proofModal">Lihat Bukti</a>

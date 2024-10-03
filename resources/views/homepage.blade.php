@@ -366,7 +366,6 @@
 </section>
 
 <!-- Modal -->
-<!-- Modal -->
 <div id="searchTicketModal" class="modal-custom">
     <div class="modal-content-custom">
         <div class="modal-header-custom">
@@ -374,42 +373,44 @@
             <button type="button" class="close-custom" id="close-modal">&times;</button>
         </div>
         <div class="modal-body-custom">
-            <form>
+            <form action="{{ route('search-tickets') }}" method="post">
+                @csrf
                 <div class="form-group mb-3">
                     <label for="from">Dari</label>
-                    <select class="form-control" id="from">
+                    <select class="form-control" id="from" name="from">
                         <option value="">Pilih Pelabuhan Keberangkatan</option>
                         @foreach($ports as $port)
-                        <option value="{{ $port->id }}">{{ $port->port_from_id }}</option>
+                        <option value="{{ $port }}">{{ $port }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="to">Tujuan</label>
-                    <select class="form-control" id="to">
+                    <select class="form-control" id="to" name="to">
                         <option value="">Pilih Pelabuhan Tujuan</option>
                         @foreach($ports as $port)
-                        <option value="{{ $port->id }}">{{ $port->port_to_id }}</option>
+                        <option value="{{ $port }}">{{ $port }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group mb-3">
                     <label for="departure_date">Tanggal Keberangkatan</label>
-                    <input type="date" class="form-control" id="departure_date" required>
+                    <input type="date" class="form-control" id="departure_date" name="departure_date" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="return_date">Tanggal Kembali</label>
                     <input type="checkbox" id="return_checkbox" />
-                    <input type="date" class="form-control" id="return_date" disabled>
+                    <input type="date" class="form-control" id="return_date" name="return_date" disabled>
+                </div>
+                <div class="modal-footer-custom">
+                    <button type="button" class="btn btn-secondary" id="batal-modal">Batal</button>
+                    <button type="submit" class="button nav__button">Cari</button>
                 </div>
             </form>
         </div>
-        <div class="modal-footer-custom">
-            <button type="button" class="btn btn-secondary" id="batal-modal">Batal</button>
-            <button type="submit" class="button nav__button">Cari</button>
-        </div>
     </div>
 </div>
+
 
 <!-- JavaScript to enable/disable return date input -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

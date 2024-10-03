@@ -49,3 +49,6 @@ Route::get('contact', function () {
 Route::post('booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
 
 Route::get('/ticket/{id}', [TicketController::class, 'index'])->name('download.ticket');
+
+Route::post('/search-tickets', 'App\Http\Controllers\list_ticket_controller@index')->name('search-tickets');
+Route::post('/booking', 'App\Http\Controllers\list_ticket_controller@store');
