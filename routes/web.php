@@ -23,6 +23,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
         Route::get('profile', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
         Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
+        Route::resource('tickets', \App\Http\Controllers\Ticket_to_Controller::class)->except('show');
+        Route::put('/admin/tickets/{id}', '\App\Http\Controllers\Ticket_to_Controller@update');
         // web.php
     });
 });

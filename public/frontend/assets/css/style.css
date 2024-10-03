@@ -295,7 +295,27 @@ body.dark-theme {
   cursor: pointer;
 }
 
+.btn {
+  display: inline-block;
+  background: linear-gradient(101deg, #d6d7da, #babbbd);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 0.5rem;
+  font-size: 0.938rem;
+  font-weight: 500;
+  -webkit-box-shadow: 0 4px 8px rgba(39, 69, 190, 0.25);
+          box-shadow: 0 4px 8px rgba(39, 69, 190, 0.25);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 .button:hover {
+  -webkit-box-shadow: 0 4px 12px rgba(39, 69, 190, 0.25);
+          box-shadow: 0 4px 12px rgba(39, 69, 190, 0.25);
+}
+
+.btn:hover {
   -webkit-box-shadow: 0 4px 12px rgba(39, 69, 190, 0.25);
           box-shadow: 0 4px 12px rgba(39, 69, 190, 0.25);
 }
