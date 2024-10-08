@@ -8,6 +8,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
     // Admin Dashboard
     Route::group(['middleware' => 'is_admin'], function () {
         Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::post('booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
 
         // booking only for admin
         Route::resource('bookings', \App\Http\Controllers\Admin\BookingController::class)->only(['index', 'destroy']);
@@ -32,6 +33,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 Auth::routes(['register' => true]);
 
 Route::post('admin/bookings/{id}/verify', [\App\Http\Controllers\BookingController::class, 'verify'])->name('admin.bookings.verify');
+Route::post('booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('homepage');
 // travel packages
@@ -46,8 +48,6 @@ Route::get('contact', function () {
     return view('contact');
 })->name('contact');
 // booking
-Route::post('booking', [App\Http\Controllers\BookingController::class, 'store'])->name('booking.store');
-
 Route::get('/ticket/{id}', [TicketController::class, 'index'])->name('download.ticket');
 
 Route::post('/search-tickets', 'App\Http\Controllers\list_ticket_controller@index')->name('search-tickets');
