@@ -98,7 +98,23 @@
             </li>
 
             </li>
-
+            @elseif(Auth::user()->is_admin == 3)
+            <li class="nav-item">
+                <a href="{{ route('admin.bookings.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-book"></i>
+                    <p>
+                        {{ __('Booking') }}
+                    </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.loket.cekin') }}" class="nav-link">
+                    <i class="nav-icon fas fa-ticket-alt"></i>
+                    <p>
+                        {{ __('Cekin') }}
+                    </p>
+                </a>
+            </li>
             @endif
         </ul>
     </nav>

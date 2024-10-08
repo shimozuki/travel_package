@@ -26,6 +26,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], 
 
         Route::resource('tickets', \App\Http\Controllers\Ticket_to_Controller::class)->except('show');
         Route::put('/admin/tickets/{id}', '\App\Http\Controllers\Ticket_to_Controller@update');
+        Route::get('/loket', [\App\Http\Controllers\LoketController::class, 'index'])->name('loket.cekin');
+        Route::get('/loket/search', [\App\Http\Controllers\LoketController::class, 'searchTicket'])->name('loket.search');
+        Route::get('admin/loket/boardingpass', [\App\Http\Controllers\LoketController::class, 'boardingpass'])->name('loket.boardingpass');
         // web.php
     });
 });

@@ -41,7 +41,7 @@
       left: 50%;
       width: 200px;
       height: 200px;
-      background-image: url('karya-bahari-fast-boat_logo.jpg');
+      background-image: url('/frontend/assets/img/karya-bahari-fast-boat_logo.jpg');
       background-size: contain;
       background-position: center;
       background-repeat: no-repeat;
@@ -137,6 +137,44 @@
       font-size: 12px;
       color: #777;
     }
+
+    .print-button {
+      position: relative;
+      top: 0;
+      left: 0;
+      margin-top: 330px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .print-button:hover {
+      background-color: #0056b3;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      .boarding-pass,
+      .boarding-pass * {
+        visibility: visible;
+      }
+
+      .boarding-pass {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+
+      .print-button {
+        visibility: hidden;
+      }
+    }
   </style>
 </head>
 
@@ -144,20 +182,19 @@
   <div class="boarding-pass">
     <div class="left-side">
       <div class="header">
-        <img src="klu.png" alt="KLU Logo" class="klu-logo">
+        <img src="{{ asset('frontend/assets/img/klu.png') }}" alt="KLU Logo" class="klu-logo">
         <div class="header-text">
           <h1>Pemerintah Kabupaten Lombok Tengah</h1>
           <h2>"Karya Bahari"</h2>
         </div>
-        <img src="jasa_raharja.png" alt="Jasa Raharja Logo" class="jasa-logo">
+        <img src="{{ asset('frontend/assets/img/jasa_raharja.png') }}" alt="Jasa Raharja Logo" class="jasa-logo">
       </div>
-      <p><strong>Nama Penumpang:</strong> John Doe</p>
-      <p><strong>Tanggal:</strong> 10 Oktober 2024</p>
+      <p><strong>Nama:</strong> {{ $ticket->name }}</p>
+      <p><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($ticket->date)->format('l, j F Y') }}</p>
       <p><strong>Jam Keberangkatan:</strong> 08:00 AM</p>
-      <p><strong>Dari:</strong> Pelabuhan A</p>
-      <p><strong>Tujuan:</strong> Pulau B</p>
+      <p><strong>Dari:</strong> {{ $ticket->ticket->port_from_id }}</p>
+      <p><strong>Tujuan:</strong> {{ $ticket->ticket->port_to_id }}</p>
     </div>
-
 
     <div class="right-side">
       <h2>Boarding Pass</h2>
@@ -169,6 +206,7 @@
       </div>
     </div>
   </div>
+  <center><button class="print-button" onclick="window.print()">Cetak</button></center>
 </body>
 
 </html>
